@@ -16,30 +16,33 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
@@ -57,8 +60,6 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'FundComputacion_Semana_7';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -66,6 +67,7 @@
     <link rel="prev" title="Semana 6: Listas y Tuplas" href="FundComputacion_Semana_6.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -81,19 +83,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -101,7 +92,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -109,8 +99,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -126,7 +116,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -156,21 +147,17 @@
     
     
     <img src="_static/UdeA.png" class="logo__image only-light" alt="Fundamentación en Computación - Home"/>
-    <script>document.write(`<img src="_static/UdeA.png" class="logo__image only-dark" alt="Fundamentación en Computación - Home"/>`);</script>
+    <img src="_static/UdeA.png" class="logo__image only-dark pst-js-only" alt="Fundamentación en Computación - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -203,9 +190,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -349,24 +341,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -408,7 +392,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="semana-7-conjuntos-y-diccionarios">
+  <section id="semana-7-conjuntos-y-diccionarios">
 <h1>Semana 7: Conjuntos y Diccionarios<a class="headerlink" href="#semana-7-conjuntos-y-diccionarios" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -534,10 +518,9 @@ document.write(`
 </div>
 </div>
 <p>Ejemplo</p>
-<p>La tercera ley de Kepler establece la siguiente relación entre el periodo orbital <span class="math notranslate nohighlight">\(T\)</span> de un planeta y la longitud del semieje mayor de su órbita <span class="math notranslate nohighlight">\(a\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[T^2 = \frac{4\pi^2 a^3}{MG}\]</div>
-<p>donde <span class="math notranslate nohighlight">\(M = 1.989\times10^{30}\)</span> kg es la masa del sol y <span class="math notranslate nohighlight">\(G = 6.674\times 10^{−11}\)</span>m<span class="math notranslate nohighlight">\(^3\)</span>/kg s<span class="math notranslate nohighlight">\(^2\)</span> es la constante de gravitación universal. Escriba un programa donde dado el semieje mayor <span class="math notranslate nohighlight">\(a\)</span> de 5 planetas (dados en forma de diccionario), se calcule y muestre en pantalla el periodo orbital del cuerpo en años.</p>
+<p>La tercera ley de Kepler establece la siguiente relación entre el periodo orbital $T$ de un planeta y la longitud del semieje mayor de su órbita $a$:</p>
+<p>$$T^2 = \frac{4\pi^2 a^3}{MG}$$</p>
+<p>donde $M = 1.989\times10^{30}$ kg es la masa del sol y $G = 6.674\times 10^{−11}$m$^3$/kg s$^2$ es la constante de gravitación universal. Escriba un programa donde dado el semieje mayor $a$ de 5 planetas (dados en forma de diccionario), se calcule y muestre en pantalla el periodo orbital del cuerpo en años.</p>
 <p><strong>Nota:</strong> Debe indicar de forma precisa las unidades físicas tanto a la hora de pedir los datos de entrada, como al mostrar el resultado final. Adicionalmente, debe mostrar el resultado con tres cifras significativas y en notación científica.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -588,7 +571,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;banano&#39;, &#39;pera&#39;, &#39;naranja&#39;, &#39;manzana&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;manzana&#39;, &#39;naranja&#39;, &#39;pera&#39;, &#39;banano&#39;}
 </pre></div>
 </div>
 </div>
@@ -711,12 +694,12 @@ document.write(`
 <li><p>Considere la lista [“sol”, “pedro”, “alejandra”, “roman”]. Escriba un programa que:</p></li>
 </ol>
 <ul class="simple">
-<li><p>Muestre en pantalla únicamente aquellos nombres que tengan menos de <span class="math notranslate nohighlight">\(5\)</span> letras.</p></li>
-<li><p>Muestre en pantalla únicamente aquellos nombres que empiecen por la letra <span class="math notranslate nohighlight">\(a\)</span>.</p></li>
-<li><p>Muestre en pantalla únicamente aquellos nombres que empiecen y terminen por la letra <span class="math notranslate nohighlight">\(a\)</span>.</p></li>
+<li><p>Muestre en pantalla únicamente aquellos nombres que tengan menos de $5$ letras.</p></li>
+<li><p>Muestre en pantalla únicamente aquellos nombres que empiecen por la letra $a$.</p></li>
+<li><p>Muestre en pantalla únicamente aquellos nombres que empiecen y terminen por la letra $a$.</p></li>
 </ul>
 <ol class="arabic simple" start="2">
-<li><p>Dada la siguiente lista: <span class="math notranslate nohighlight">\(numbers\)</span> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</p></li>
+<li><p>Dada la siguiente lista: $numbers$ = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</p></li>
 </ol>
 <ul class="simple">
 <li><p>Obtenga el tercer elemento de la lista.</p></li>
@@ -724,7 +707,7 @@ document.write(`
 <li><p>Obtenga los elementos desde el segundo hasta el sexto (incluyendo ambos).</p></li>
 </ul>
 <ol class="arabic simple" start="3">
-<li><p>Dada la lista <span class="math notranslate nohighlight">\(fruits\)</span> = [“apple”, “banana”, “cherry”, “date”]:</p></li>
+<li><p>Dada la lista $fruits$ = [“apple”, “banana”, “cherry”, “date”]:</p></li>
 </ol>
 <ul class="simple">
 <li><p>Obtenga el segundo y tercer elemento de la lista.</p></li>
@@ -732,14 +715,14 @@ document.write(`
 <li><p>Obtenga los últimos dos elementos de la lista.</p></li>
 </ul>
 <ol class="arabic simple" start="4">
-<li><p>Escriba un programa que almacene las asignaturas de un curso (por ejemplo Matemáticas, Física, Química, Historia y Lengua) en una lista y la muestre por pantalla el mensaje Yo estudio <span class="math notranslate nohighlight">\(\langle\text{asignatura}\rangle\)</span>, donde <span class="math notranslate nohighlight">\(\langle\text{asignatura}\rangle\)</span> es cada una de las asignaturas de la lista.</p></li>
-<li><p>Escriba un programa que almacene las asignaturas de un curso (por ejemplo Matemáticas, Física, Química, Historia y Lengua) en una lista, pregunte al usuario la nota (de 0 a 5) que ha sacado en cada asignatura. Al final el programa debe mostrar por pantalla las asignaturas que el usuario tiene que repetir (<span class="math notranslate nohighlight">\(nota &lt; 3\)</span>).</p></li>
-<li><p>Escriba un programa que lea una frase por parte de un usuario. Las letras de la frase que estén antes de la <span class="math notranslate nohighlight">\(m\)</span> (teniendo como referencia el abcdario) deben ser almacenadas en una lista, mientras que las letras que estén después de la <span class="math notranslate nohighlight">\(m\)</span> (incluyéndola) deben ser almacenadas en otra lista. Asuma que la entrada sólo incluirá letras.</p></li>
+<li><p>Escriba un programa que almacene las asignaturas de un curso (por ejemplo Matemáticas, Física, Química, Historia y Lengua) en una lista y la muestre por pantalla el mensaje Yo estudio $\langle\text{asignatura}\rangle$, donde $\langle\text{asignatura}\rangle$ es cada una de las asignaturas de la lista.</p></li>
+<li><p>Escriba un programa que almacene las asignaturas de un curso (por ejemplo Matemáticas, Física, Química, Historia y Lengua) en una lista, pregunte al usuario la nota (de 0 a 5) que ha sacado en cada asignatura. Al final el programa debe mostrar por pantalla las asignaturas que el usuario tiene que repetir ($nota &lt; 3$).</p></li>
+<li><p>Escriba un programa que lea una frase por parte de un usuario. Las letras de la frase que estén antes de la $m$ (teniendo como referencia el abcdario) deben ser almacenadas en una lista, mientras que las letras que estén después de la $m$ (incluyéndola) deben ser almacenadas en otra lista. Asuma que la entrada sólo incluirá letras.</p></li>
 <li><p>Escriba un programa que lea palabras del usuario hasta que éste introduzca una línea en blanco. Después de que el usuario introduzca una línea en blanco, su programa debe mostrar cada palabra introducida por el usuario exactamente una vez. Las palabras deben aparecer en el mismo orden en que fueron introducidas.</p></li>
 <li><p>Escriba un programa para comprobar si una lista dada contiene tres números comunes consecutivos. El programa debe mostrar estos números como salida.</p></li>
 <li><p>Considere la lista [1, 2, 3, 4, 5, 6]. Escriba un programa que para cada valor de la lista imprima en pantalla su cuadrado y raíz cuadrada con un mensaje apropiado.</p></li>
 <li><p>Escriba un programa que pida al usuario cinco números enteros, los almacene en una lista y los muestre en pantalla ordenados de mayor a menor</p></li>
-<li><p>Dada una lista de <span class="math notranslate nohighlight">\(n\)</span> enteros positivos, escriba un programa que encuentre el máximo de cada par adyacente en la lista y lo almacene en una nueva lista.</p></li>
+<li><p>Dada una lista de $n$ enteros positivos, escriba un programa que encuentre el máximo de cada par adyacente en la lista y lo almacene en una nueva lista.</p></li>
 <li><p>Elabore un programa que reciba como parámetros una matriz cuadrada y la dimensión de ella. Su programa debe retornar verdadero si la matriz es un cuadrado mágico, y falso de lo contrario. Una matriz es un cuadrado mágico si la suma de los datos de cada fila, de cada columna y de cada diagonal es la misma.</p></li>
 <li><p>Escriba un programa que pida al usuario una palabra y cree un diccionario que contenga el número de veces que contiene cada vocal. El programa no debe diferenciar entre letras minúsculas y mayúsculas.</p></li>
 <li><p>Escriba un programa que permita gestionar la base de datos de clientes de una empresa. Los clientes se guardarán en un diccionario en el que la clave de cada cliente será un número de identificación, y el valor será otro diccionario con los datos del cliente (nombre, dirección, teléfono, correo, preferente), donde preferente tendrá el valor <code class="docutils literal notranslate"><span class="pre">True</span></code> si se trata de un cliente preferente. El programa debe preguntar al usuario por una opción del siguiente menú: (1) Añadir cliente, (2) Eliminar cliente, (3) Mostrar cliente, (4) Listar todos los clientes, (5) Listar clientes preferentes, (6) Terminar. En función de la opción elegida el programa tendrá que hacer lo siguiente:</p></li>
@@ -757,7 +740,7 @@ document.write(`
 </ol>
 <p>{‘01234567L’: {‘nombre’: ‘Luis González’, ‘email’: ‘luisgonzalez&#64;mail.com’, ‘teléfono’: ‘656343576’, ‘descuento’: 12.5}, ‘71476342J’: {‘nombre’: ‘Macarena Ramírez’, ‘email’: ‘macarena&#64;mail.com’, ‘teléfono’: ‘692839321’, ‘descuento’: 8.0}, ‘63823376M’: {‘nombre’: ‘Juan José Martínez’, ‘email’: ‘juanjo&#64;mail.com’, ‘teléfono’: ‘664888233’, ‘descuento’: 5.2}, ‘98376547F’: {‘nombre’: ‘Carmen Sánchez’, ‘email’: ‘carmen&#64;mail.com’, ‘teléfono’: ‘667677855’, ‘descuento’: 15.7}}</p>
 <ol class="arabic simple" start="16">
-<li><p>Escriba un programa que almacene el diccionario con los créditos de las asignaturas de un semestre {‘Matemáticas’: 6, ‘Física’: 4, ‘Química’: 5} y después muestre por pantalla los créditos de cada asignatura en el formato <span class="math notranslate nohighlight">\(\langle{\text{asignatura}}\rangle\)</span> tiene <span class="math notranslate nohighlight">\(\langle{\text{creditos}}\rangle\)</span> créditos, donde <span class="math notranslate nohighlight">\(\langle{\text{asignatura}}\rangle\)</span> es cada una de las asignaturas del curso, y <span class="math notranslate nohighlight">\(\langle{\text{creditos}}\rangle\)</span> son sus créditos. Al final debe mostrar también el número total de créditos del semestre.</p></li>
+<li><p>Escriba un programa que almacene el diccionario con los créditos de las asignaturas de un semestre {‘Matemáticas’: 6, ‘Física’: 4, ‘Química’: 5} y después muestre por pantalla los créditos de cada asignatura en el formato $\langle{\text{asignatura}}\rangle$ tiene $\langle{\text{creditos}}\rangle$ créditos, donde $\langle{\text{asignatura}}\rangle$ es cada una de las asignaturas del curso, y $\langle{\text{creditos}}\rangle$ son sus créditos. Al final debe mostrar también el número total de créditos del semestre.</p></li>
 <li><p>Escriba un programa que recorra una lista y cree un diccionario que contenga el número de veces que aparece cada número en la lista.</p></li>
 </ol>
 </section>
@@ -818,7 +801,8 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -882,8 +866,8 @@ By Fabio Cardona Jaramillo, Esteban Silva Villa, Juan Vásquez Betancur, David S
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

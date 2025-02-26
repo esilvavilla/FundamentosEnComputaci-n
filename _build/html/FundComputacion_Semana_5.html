@@ -16,30 +16,33 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
@@ -57,8 +60,6 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'FundComputacion_Semana_5';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -66,6 +67,7 @@
     <link rel="prev" title="Semana 4: Máquinas de Turing y Python" href="FundComputacion_Semana_4.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -81,19 +83,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -101,7 +92,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -109,8 +99,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -126,7 +116,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -156,21 +147,17 @@
     
     
     <img src="_static/UdeA.png" class="logo__image only-light" alt="Fundamentación en Computación - Home"/>
-    <script>document.write(`<img src="_static/UdeA.png" class="logo__image only-dark" alt="Fundamentación en Computación - Home"/>`);</script>
+    <img src="_static/UdeA.png" class="logo__image only-dark pst-js-only" alt="Fundamentación en Computación - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -203,9 +190,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -349,24 +341,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -414,7 +398,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="semana-5-condicionales-y-ciclos-for-y-while">
+  <section id="semana-5-condicionales-y-ciclos-for-y-while">
 <h1>Semana 5: Condicionales y Ciclos (<code class="docutils literal notranslate"><span class="pre">For</span></code> y <code class="docutils literal notranslate"><span class="pre">While</span></code>)<a class="headerlink" href="#semana-5-condicionales-y-ciclos-for-y-while" title="Link to this heading">#</a></h1>
 <p>En este punto ya hemos definido las diferentes operaciones aritméticas, hemos asignado valores numéricos, booleanos y cadenas de caracteres a variables. Ahora, al igual que como lo hacíamos cuando creábamos nuestros pseudo-códigos, definiremos condicionales y ciclos en Python.</p>
 <div class="cell docutils container">
@@ -566,7 +550,7 @@ El número es mayor que 3
 </div>
 </div>
 </div>
-<p>Si no ponemos el <code class="docutils literal notranslate"><span class="pre">elif</span></code>, se ejecutan ambos condicionales. Con el <code class="docutils literal notranslate"><span class="pre">elif</span></code>, solo entra a la segunda condición si no se cumple la primera. En este ejemplo es claro que <span class="math notranslate nohighlight">\(a\geq2\)</span> y <span class="math notranslate nohighlight">\(a\geq3\)</span>, pero solo se imprime que el número es mayor o igual que dos.</p>
+<p>Si no ponemos el <code class="docutils literal notranslate"><span class="pre">elif</span></code>, se ejecutan ambos condicionales. Con el <code class="docutils literal notranslate"><span class="pre">elif</span></code>, solo entra a la segunda condición si no se cumple la primera. En este ejemplo es claro que $a\geq2$ y $a\geq3$, pero solo se imprime que el número es mayor o igual que dos.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
@@ -674,7 +658,7 @@ El número es mayor que 3
 </div>
 </div>
 </div>
-<p><strong>Nota:</strong> En python los contadores por defecto inician desde 0 y terminan en <span class="math notranslate nohighlight">\(n-1\)</span></p>
+<p><strong>Nota:</strong> En python los contadores por defecto inician desde 0 y terminan en $n-1$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span> <span class="c1">#Nuevo tipo de variable usada para asignar valores al contador</span>
@@ -709,7 +693,7 @@ El número es mayor que 3
 </div>
 </div>
 </div>
-<p><strong>Ejemplo</strong> Este ciclo se ejecutará tantas veces como la diferencia entre 0 y el número <span class="math notranslate nohighlight">\(n\)</span> que se le pide al usuario que ingrese, aunque es un ciclo <code class="docutils literal notranslate"><span class="pre">while</span></code>. Esto dado que la ciondición establecida fue que <span class="math notranslate nohighlight">\(i \leq n\)</span>. <span class="math notranslate nohighlight">\(i\)</span> se actualiza aumentando su valor en 1 en cada iteración.</p>
+<p><strong>Ejemplo</strong> Este ciclo se ejecutará tantas veces como la diferencia entre 0 y el número $n$ que se le pide al usuario que ingrese, aunque es un ciclo <code class="docutils literal notranslate"><span class="pre">while</span></code>. Esto dado que la ciondición establecida fue que $i \leq n$. $i$ se actualiza aumentando su valor en 1 en cada iteración.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
@@ -950,15 +934,15 @@ i = 5
 <section id="ejercicios">
 <h2>5.3. Ejercicios<a class="headerlink" href="#ejercicios" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Una juguetería tiene mucho éxito en dos de sus productos: payasos y muñecas. Se suele hacer venta por correo y la empresa de logística les cobra por peso de cada paquete así que deben calcular el peso de los payasos y muñecas que saldrán en cada paquete a demanda. Cada payaso pesa <span class="math notranslate nohighlight">\(112\, \text{g}\)</span> y cada muñeca <span class="math notranslate nohighlight">\(75\, \text{g}\)</span>. Escribe un programa que lea el número de payasos y muñecas vendidos en el último pedido y calcule el peso total del paquete que será enviado.</p></li>
-<li><p>Una panadería vende barras de pan a <span class="math notranslate nohighlight">\(3.49\)</span> euros cada una. El pan que no es horneado el mismo día tiene un descuento del 60%. Escribe un programa que comience leyendo el número de barras vendidas que no son del día. Después el programa debe mostrar el precio habitual de una barra de pan, el descuento que se le hace por no ser fresca y el coste final total.</p></li>
-<li><p>Imagina que acabas de abrir una nueva cuenta de ahorros que gana un cuatro por ciento de interés al año. Los intereses que ganas se pagan al final del año y se añaden al saldo de la cuenta de ahorros. Escribe un programa que comience leyendo la cantidad de dinero depositada en la cuenta por un usuario. Luego, debe calcular y mostrar la cantidad en la cuenta de ahorros después de <span class="math notranslate nohighlight">\(1\)</span> y <span class="math notranslate nohighlight">\(2\)</span> años.</p></li>
+<li><p>Una juguetería tiene mucho éxito en dos de sus productos: payasos y muñecas. Se suele hacer venta por correo y la empresa de logística les cobra por peso de cada paquete así que deben calcular el peso de los payasos y muñecas que saldrán en cada paquete a demanda. Cada payaso pesa $112, \text{g}$ y cada muñeca $75, \text{g}$. Escribe un programa que lea el número de payasos y muñecas vendidos en el último pedido y calcule el peso total del paquete que será enviado.</p></li>
+<li><p>Una panadería vende barras de pan a $3.49$ euros cada una. El pan que no es horneado el mismo día tiene un descuento del 60%. Escribe un programa que comience leyendo el número de barras vendidas que no son del día. Después el programa debe mostrar el precio habitual de una barra de pan, el descuento que se le hace por no ser fresca y el coste final total.</p></li>
+<li><p>Imagina que acabas de abrir una nueva cuenta de ahorros que gana un cuatro por ciento de interés al año. Los intereses que ganas se pagan al final del año y se añaden al saldo de la cuenta de ahorros. Escribe un programa que comience leyendo la cantidad de dinero depositada en la cuenta por un usuario. Luego, debe calcular y mostrar la cantidad en la cuenta de ahorros después de $1$ y $2$ años.</p></li>
 <li><p>Elabore un programa que lea una duración en la forma DD:HH:MM:SS, donde DD, HH, MM y SS representan días, horas, minutos y segundos, respectivamente. Las horas, los minutos y los segundos deben estar formateados de manera que ocupen exactamente dos dígitos. Además, el programa debe calcular y mostrar el número total de segundos representados por esta duración.</p></li>
 <li><p>Elabore un programa que lea un número total de segundos ingresados por el usuario y dé la duración del intervalo en días, horas, minutos y segundos en la forma DD:HH:MM:SS. Las horas, los minutos y los segundos deben estar formateados de manera que ocupen exactamente dos dígitos</p></li>
 <li><p>Elabore un programa que lea la longitud de dos catetos de un triángulo rectangulo e imprima la longitud de la hipotenusa.</p></li>
 <li><p>Elabore un algoritmo que lea el volumen de una esfera y calcule el radio de la misma.</p></li>
 <li><p>Escribir un programa que pregunte al usuario por el número de horas trabajadas y el coste por hora. Después debe mostrar por pantalla la paga que le corresponde.</p></li>
-<li><p>Escribir un programa que pida al usuario dos números enteros <span class="math notranslate nohighlight">\(n\)</span> y <span class="math notranslate nohighlight">\(m\)</span> y muestre por pantalla: ``la división de <span class="math notranslate nohighlight">\(n\)</span> entre <span class="math notranslate nohighlight">\(m\)</span> da un cociente <span class="math notranslate nohighlight">\(c\)</span> y un residuo <span class="math notranslate nohighlight">\(r\)</span>”, donde <span class="math notranslate nohighlight">\(n\)</span> y <span class="math notranslate nohighlight">\(m\)</span> son los números introducidos por el usuario, y <span class="math notranslate nohighlight">\(c\)</span> y <span class="math notranslate nohighlight">\(r\)</span> son el cociente y el residuo de la división entera respectivamente.</p></li>
+<li><p>Escribir un programa que pida al usuario dos números enteros $n$ y $m$ y muestre por pantalla: ``la división de $n$ entre $m$ da un cociente $c$ y un residuo $r$”, donde $n$ y $m$ son los números introducidos por el usuario, y $c$ y $r$ son el cociente y el residuo de la división entera respectivamente.</p></li>
 </ol>
 </section>
 </section>
@@ -1018,7 +1002,8 @@ i = 5
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1088,8 +1073,8 @@ By Fabio Cardona Jaramillo, Esteban Silva Villa, Juan Vásquez Betancur, David S
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>
